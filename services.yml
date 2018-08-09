@@ -1,0 +1,72 @@
+---
+
+- name: Install flexget
+  pip:
+    name: flexget
+    virtualenv: "{{flexget_path}}/venv"
+
+- name: Copy flexget config
+  file:
+    src: ./files/flexget
+    dest: "{flexget_path}}"
+    state: link
+    force: yes
+
+- name: setup crontab hourly
+  crontab:
+    name: "run flexget"
+    user: "{[username}}"
+    special_time: hourly
+    job: "{{item}}"
+  with_items:
+    - "{{flexget_path}}/bin/flexget --cron -c /opt/flexget/config_tv.yml execute >/dev/null 2>&1"
+    - "{{flexget_path}}/bin/flexget --cron -c /opt/flexget/config_sorter.yml execute >/dev/null 2>&1"
+    - "get_iplayer --pvr --quiet"
+
+- name: setup crontab rclone crontab
+  crontab:
+    name: "run flexget"
+    user: "{[username}}"
+    special_time: hourly
+    job: "flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ > /dev/null 2>&1"
+
+- name: setup crontab ssl cert plex
+  crontab:
+    name: "run flexget"
+    user: "{[username}}"
+    special_time: monthly
+    job: "sudo openssl pkcs12 -password pass:123 -export -out /var/lib/plexmediaserver/certificate.pfx -inkey /etc/apache2/ssl/certs/seedbox.copeland.me.uk-ssl.key -in /etc/apache2/ssl/certs/seedbox.copeland.me.uk-ssl.pem -certfile /root/.acme.sh/seedbox.copeland.me.uk/fullchain.cer && sudo chown plex:plex /var/lib/plexmediaserver/certificate.pfx"
+
+- name: setup crontab radarr restart due to memory leak, mono ugh.
+  crontab:
+    name: "run flexget"
+    user: "{{username}}"
+    special_time: monthly
+    job: "sudo systemctl restart sonarr@bhcopeland.service && sudo systemctl restart radarr.service"
+
+# iplayer
+
+- name: Copy get_iplayer config
+  file:
+    src: ./files/.get_iplayer
+    dest: "/home/{{username}}/.get_iplayer"
+    owner: "{{username}}"
+    state: link
+    force: yes
+
+# rclone
+- name: Copy systemd config
+  file:
+    src: ./files/systemd/rclone.service
+    dest: /etc/systemd/system/rclone.service
+    state: link
+    force: yes
+
+- name: reload systemd
+  systemd: daemon_reload=yes
+
+- name: enable rclone
+  systemd:
+    name: rclone
+    enabled: yes
+    state: started

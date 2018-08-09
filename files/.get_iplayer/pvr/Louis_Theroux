@@ -1,0 +1,4 @@
+fileprefix <nameshort>-<series>-<episodeshort>
+output /var/data/Downloads/TV/
+tvmode best
+search0 Louis Theroux

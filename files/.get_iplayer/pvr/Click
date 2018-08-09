@@ -1,0 +1,5 @@
+exclude Short Edition
+fileprefix <nameshort> <firstbcastdate> <episodeshort>
+output /var/data/Downloads/TV/
+tvmode best
+search0 Click

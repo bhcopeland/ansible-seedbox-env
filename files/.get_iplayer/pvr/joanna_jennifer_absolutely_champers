@@ -1,0 +1,4 @@
+fileprefix <nameshort>-<firstbcastdate>-<episodeshort>
+output /var/data/Downloads/TV/
+tvmode best
+search0 Absolutely Champers
