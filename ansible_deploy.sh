@@ -6,9 +6,10 @@
    gather_facts: false
    become: yes
 ##   ignore_errors: yes
-   vars_files:
-     - secrets.yml
    tasks:
      - name: install deps
        include: deps.yml
        tags: deps
+
+     - name: install services
+       include: services.yml

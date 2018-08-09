@@ -1,3 +1,5 @@
 *.cache
 *.cache.old
 *.log
+*.retry
+.vault_pass

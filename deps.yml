@@ -8,11 +8,25 @@
     - fuse
     - zsh
 
-- name: add iplayer ppa
+- name: add key
+  apt_key:
+    keyserver: keys.gnupg.net
+    id: 11E9DE8848F2B65222AA75B8D1820DB22A11534E
+
+- name: add ppas
   apt_repository:
-    repo: ppa:jon-hedgerows/get-iplayer
-    state: present
+    repo: "{{item}}"
+  with_items:
+    - "ppa:jon-hedgerows/get-iplayer"
+    - "deb https://weechat.org/ubuntu xenial main"
 
-- name: install get_iplayer
-  apt: pkg=get-iplayer update_cache=yes
+- name: install ppa pkgs
+  apt: pkg={{item}} update_cache=yes
+  with_items:
+    - get-iplayer
+    - weechat
 
+- name: Install virtualenv via pip
+  pip:
+    name: virtualenv
+    executable: pip3
