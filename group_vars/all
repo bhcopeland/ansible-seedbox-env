@@ -2,3 +2,5 @@
 
 username: bhcopeland
 flexget_path: /opt/flexget
+
+data_dir: /var/data/

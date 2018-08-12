@@ -30,3 +30,8 @@
   pip:
     name: virtualenv
     executable: pip3
+
+- name: Cloning oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: "/home/{{username}}/.oh-my-zsh"
