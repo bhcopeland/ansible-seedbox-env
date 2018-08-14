@@ -1,4 +1,4 @@
 [submodule "ansible_install"]
-    path = ansible/install
+    path = ansible_install
     url = https://github.com/neillturner/omnibus-ansible
     ignore = dirty
