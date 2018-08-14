@@ -55,14 +55,6 @@
     - Seed
     - TV
 
-- name: Copy zshrc config
-  file:
-    src: "{{playbook_dir}}/files/zshrc"
-    dest: "/home/{{username}}/.zshrc"
-    owner: "{{username}}"
-    state: link
-    force: yes
-  
 # iplayer
 
 - name: Copy get_iplayer config
@@ -94,3 +86,4 @@
     name: rclone
     enabled: yes
     state: started
+

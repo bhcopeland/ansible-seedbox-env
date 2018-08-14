@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+ZSH="/home/{{username}}/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -50,7 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git cp archlinux dircycle gpg-agent jira pip python ssh-agent systemd websearch)
 
-plugins=(git git-extras cp archlinux gpg-agent pip python systemd ssh-agent aws docker pass dirhistory dirpersist virtualenv)
+plugins=(git git-extras cp archlinux pip python systemd ssh-agent aws docker pass dirhistory dirpersist virtualenv)
 
 # User configuration
 

@@ -35,3 +35,10 @@
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
     dest: "/home/{{username}}/.oh-my-zsh"
+
+- name: Copy zshrc config
+  template:
+    src: "{{playbook_dir}}/templates/zshrc"
+    dest: "/home/{{username}}/.zshrc"
+    owner: "{{username}}"
+    force: yes

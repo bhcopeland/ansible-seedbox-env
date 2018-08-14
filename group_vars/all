@@ -4,3 +4,6 @@ username: bhcopeland
 flexget_path: /opt/flexget
 
 data_dir: /var/data/
+
+rclone_version: 1.42
+rclone_os: "linux-amd64"
