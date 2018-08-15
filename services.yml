@@ -19,11 +19,24 @@
   with_items:
     - "{{flexget_path}}"
     - /media/Storage/
-    - "{{data_dir}}/torrents/rtorrent/completed"
-    - "{{data_dir}}/torrents/rtorrent/TV"
-    - "{{data_dir}}/torrents/rtorrent/Movies"
-    - "{{data_dir}}/torrents/rtorrent/Music"
-    - "{{data_dir}}/torrents/rtorrent/Seed"
+    - "{{mnt_dir}}/torrents/rtorrent/completed"
+    - "{{mnt_dir}}/torrents/rtorrent/TV"
+    - "{{mnt_dir}}/torrents/rtorrent/Movies"
+    - "{{mnt_dir}}/torrents/rtorrent/Music"
+    - "{{mnt_dir}}/torrents/rtorrent/Seed"
+    - "{{mnt_dir}}/TV"
+    - "{{mnt_dir}}/completed/TV"
+    - "{{mnt_dir}}/TV_4K"
+    - "{{mnt_dir}}/completed/TV_4K"
+    - "{{mnt_dir}}/Movies_4K"
+    - "{{mnt_dir}}/completed/Movies_4K"
+    - "{{mnt_dir}}/Movies"
+    - "{{mnt_dir}}/completed/Movies"
+    - "{{data_dir}}/TV"
+    - "{{data_dir}}/TV_4K"
+    - "{{data_dir}}/Movies_4K"
+    - "{{data_dir}}/Movies"
+    - "{{data_dir}}/completed/Movies"
 
 - name: Copy flexget config
   copy:
@@ -42,8 +55,8 @@
 
 - name: Ensure rtorrent folders exist
   file:
-    src: "/home/{{username}}/torrents/rtorrent/{{item}}"
-    dest: "{{data_dir}}/torrents/rtorrent/{{item}}"
+    dest: "/home/{{username}}/torrents/rtorrent/{{item}}"
+    src: "{{mnt_dir}}/torrents/rtorrent/{{item}}"
     owner: "{{username}}"
     group: "{{username}}"
     state: link
@@ -77,7 +90,7 @@
 - name: copy rclone conf
   copy: 
     src: "{{playbook_dir}}/files/rclone.conf"
-    dest: "/etc/rclone.conf"
+    dest: "/home/{{username}}/.config/rclone/rclone.conf"
     owner: "{{username}}"
     force: yes
 

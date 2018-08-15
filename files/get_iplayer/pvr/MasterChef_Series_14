@@ -1,4 +1,4 @@
 fileprefix <nameshort>-<senum>
-output /var/data/Downloads/TV/
+output /mnt/data/completed/TV
 tvmode best
 search0 MasterChef: Series 14
