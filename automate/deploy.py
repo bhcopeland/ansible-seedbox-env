@@ -8,7 +8,7 @@ get_iplayer = '/home/bhcopeland/.get_iplayer/pvr'
 tv_shows = [f for f in os.listdir (get_iplayer)]
 for show in tv_shows:
     print(show)
-    p = subprocess.Popen("get_iplayer --pvr --overwrite " + show, shell=True, stdout=subprocess.PIPE)
+    p = subprocess.Popen("get_iplayer --pvr " + show, shell=True, stdout=subprocess.PIPE)
     (output, err) = p.communicate()
     p_status = p.wait()
     print output
