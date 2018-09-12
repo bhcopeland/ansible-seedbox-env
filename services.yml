@@ -53,6 +53,16 @@
     virtualenv_python: python3.5
   become_user: "{{username}}"
 
+- name: Ensure default folders exist
+  file:
+    path: "/home/{{username}}/{{item}}"
+    owner: "{{username}}"
+    group: "{{username}}"
+    state: directory
+  with_items:
+    - torrents/rtorrent/
+    - .config/rclone/
+ 
 - name: Ensure rtorrent folders exist
   file:
     dest: "/home/{{username}}/torrents/rtorrent/{{item}}"
@@ -84,15 +94,22 @@
     src: "{{playbook_dir}}/files/systemd/rclone.service"
     dest: /etc/systemd/system/rclone.service
 
-- name: reload systemd
-  systemd: daemon_reload=yes
+- name: copy rclone conf local
+  copy:
+    src: "{{playbook_dir}}/files/rclone.conf" 
+    dest: "/home/{{username}}/.config/rclone/rclone.conf"
+    owner: "{{username}}"
+    force: yes
 
 - name: copy rclone conf
   copy: 
     src: "{{playbook_dir}}/files/rclone.conf"
-    dest: "/home/{{username}}/.config/rclone/rclone.conf"
-    owner: "{{username}}"
+    dest: "/etc/rclone.conf"
+    owner: root
     force: yes
+
+- name: reload systemd
+  systemd: daemon_reload=yes
 
 - name: enable rclone
   systemd:
