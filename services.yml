@@ -78,16 +78,6 @@
     - Seed
     - TV
 
-# iplayer
-
-- name: Copy get_iplayer config
-  file:
-    src: "{{playbook_dir}}/files/get_iplayer"
-    dest: "/home/{{username}}/.get_iplayer"
-    owner: "{{username}}"
-    state: link
-    force: yes
-
 # rclone
 - name: Copy systemd config
   copy:

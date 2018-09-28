@@ -17,13 +17,11 @@
   apt_repository:
     repo: "{{item}}"
   with_items:
-    - "ppa:jon-hedgerows/get-iplayer"
     - "deb https://weechat.org/ubuntu xenial main"
 
 - name: install ppa pkgs
   apt: pkg={{item}} update_cache=yes
   with_items:
-    - get-iplayer
     - weechat
 
 - name: Install virtualenv via pip

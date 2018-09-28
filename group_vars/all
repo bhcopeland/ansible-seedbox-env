@@ -6,5 +6,5 @@ flexget_path: /opt/flexget
 data_dir: /var/data
 mnt_dir: /mnt/data
 
-rclone_version: 1.42
+rclone_version: 1.43.1
 rclone_os: "linux-amd64"

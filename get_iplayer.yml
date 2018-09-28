@@ -1,0 +1,19 @@
+---
+- name: add ppas
+  apt_repository:
+    repo: "{{item}}"
+  with_items:
+    - "ppa:jon-hedgerows/get-iplayer"
+
+- name: install ppa pkgs
+  apt: pkg={{item}} update_cache=yes
+  with_items:
+    - get-iplayer
+
+- name: Copy get_iplayer config
+  file:
+    src: "{{playbook_dir}}/files/get_iplayer"
+    dest: "/home/{{username}}/.get_iplayer"
+    owner: "{{username}}"
+    state: link
+    force: yes
