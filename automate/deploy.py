@@ -18,8 +18,8 @@ for show in tv_shows:
             f = subprocess.Popen("/opt/flexget/venv/bin/flexget --cron -c /opt/flexget/config_sorter.yml execute", shell=True, stdout=subprocess.PIPE)
             (output, err) = f.communicate()
             f_status = f.wait()
-            print output
+            print("Flexget", output)
 	    r = subprocess.Popen("flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ -vvv", shell=True, stdout=subprocess.PIPE)
 	    (output, err) = r.communicate()
             r_status = r.wait()
-            print output
+            print("rclone", output)
