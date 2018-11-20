@@ -1,4 +1,4 @@
 fileprefix <nameshort>-<senum>
-output /mnt/data/completed/TV
+output /var/data/TV
 tvmode best
 search0 Flatpack Empire
