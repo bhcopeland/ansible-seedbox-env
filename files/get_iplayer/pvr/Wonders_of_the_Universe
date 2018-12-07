@@ -1,4 +1,4 @@
 fileprefix <nameshort>-<senum>-<episodeshort>
-output /var/data/TV
+output /mnt/data/completed/TV
 tvmode best
 search0 Wonders of the Universe

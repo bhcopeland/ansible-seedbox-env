@@ -1,4 +1,4 @@
 fileprefix <nameshort>-<senum>
-output /var/data/TV
+output /mnt/data/completed/TV
 tvmode best
 search0 Britain's Biggest Warship
