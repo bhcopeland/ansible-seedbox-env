@@ -18,14 +18,16 @@ for show in tv_shows:
     (output, err) = p.communicate()
     p_status = p.wait()
     print output
+    for file_com in os.listdir(path_completed):
+        sub = path_completed + '/' + file_com
+        for file_coms in os.listdir(sub):
+            r = subprocess.Popen("flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ -vvv", shell=True, stdout=subprocess.PIPE)
+	    (output, err) = r.communicate()
+	    r_status = r.wait()
+            print("rclone", output)
     for files in os.listdir(path_downloaded):
         if files.endswith(".mp4"):
             f = subprocess.Popen("/opt/flexget/venv/bin/flexget -c /opt/flexget/config_sorter.yml execute", shell=True, stdout=subprocess.PIPE)
             (output, err) = f.communicate()
             f_status = f.wait()
             print("Flexget", output)
-
-	    r = subprocess.Popen("flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ -vvv", shell=True, stdout=subprocess.PIPE)
-	    (output, err) = r.communicate()
-            r_status = r.wait()
-            print("rclone", output)
