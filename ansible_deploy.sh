@@ -1,4 +1,4 @@
-#!/usr/local/bin/ansible-playbook --ask-vault-pass
+#!/usr/bin/ansible-playbook --ask-vault-pass
 ---
 # Install and setup local env
 
@@ -22,5 +22,5 @@
      - name: install services
        include: services.yml
 
-     - name: install rclone
-       include: rclone.yml
+     - name: install docker # ansible 2.8 or newer
+       include: docker.yml

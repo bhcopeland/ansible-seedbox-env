@@ -19,8 +19,8 @@ After=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/rclone --config=/home/bhcopeland/.rclone.conf mount --allow-other --read-only gcache: /mnt/storage -vvvv
-#ExecStop=/bin/fusermount -uz /mnt/storage
+ExecStart=/usr/bin/rclone --config=/etc/rclone.conf mount --allow-other --read-only gcache: /mnt/storage -vvvv
+ExecStop=/bin/fusermount -uz /mnt/storage
 
 [Install]
 WantedBy=default.target

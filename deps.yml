@@ -3,26 +3,39 @@
 - name: install apt packages
   apt: pkg={{item}} update_cache=yes
   with_items:
+    - python3
     - python3-pip
     - software-properties-common
     - fuse
     - zsh
+    - docker.io
+    - docker-compose
+    - mosh
+
+- name: install rclone
+  apt: 
+    deb: https://downloads.rclone.org/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb
 
 - name: add key
   apt_key:
     keyserver: keys.gnupg.net
-    id: 11E9DE8848F2B65222AA75B8D1820DB22A11534E
+    id: "{{item}}"
+  with_items:
+    - 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367 #ansible
+    - 11E9DE8848F2B65222AA75B8D1820DB22A11534E #weechat
 
 - name: add ppas
   apt_repository:
     repo: "{{item}}"
   with_items:
-    - "deb https://weechat.org/ubuntu xenial main"
+    - "deb https://weechat.org/ubuntu bionic main"
+    - ppa:ansible/ansible
 
 - name: install ppa pkgs
   apt: pkg={{item}} update_cache=yes
   with_items:
     - weechat
+    - ansible
 
 - name: Install virtualenv via pip
   pip:

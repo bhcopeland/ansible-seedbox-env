@@ -16,14 +16,17 @@
     path: "{{item}}"
     owner: "{{username}}"
     state: directory
+  ignore_errors: yes #needed for rclone mounts
   with_items:
+    - "/mnt/storage" #rclone mount
+    - "/mnt/gdrive" #rclone mount
+    - "/mnt/gstorage" #rclone mount
     - "{{flexget_path}}"
-    - /media/Storage/
-    - "{{mnt_dir}}/torrents/rtorrent/completed"
-    - "{{mnt_dir}}/torrents/rtorrent/TV"
-    - "{{mnt_dir}}/torrents/rtorrent/Movies"
-    - "{{mnt_dir}}/torrents/rtorrent/Music"
-    - "{{mnt_dir}}/torrents/rtorrent/Seed"
+    - "{{mnt_dir}}/torrents/completed"
+    - "{{mnt_dir}}/torrents/TV"
+    - "{{mnt_dir}}/torrents/Movies"
+    - "{{mnt_dir}}/torrents/Music"
+    - "{{mnt_dir}}/torrents/Seed"
     - "{{mnt_dir}}/TV"
     - "{{mnt_dir}}/completed/TV"
     - "{{mnt_dir}}/TV_4K"
@@ -50,7 +53,7 @@
   pip:
     name: flexget
     virtualenv: "{{flexget_path}}/venv"
-    virtualenv_python: python3.5
+    #    virtualenv_python: python3.5
   become_user: "{{username}}"
 
 - name: Ensure default folders exist
@@ -60,13 +63,13 @@
     group: "{{username}}"
     state: directory
   with_items:
-    - torrents/rtorrent/
+    - torrents/
     - .config/rclone/
  
-- name: Ensure rtorrent folders exist
+- name: Ensure torrent folders exist
   file:
-    dest: "/home/{{username}}/torrents/rtorrent/{{item}}"
-    src: "{{mnt_dir}}/torrents/rtorrent/{{item}}"
+    dest: "/home/{{username}}/torrents/{{item}}"
+    src: "{{mnt_dir}}/torrents/{{item}}"
     owner: "{{username}}"
     group: "{{username}}"
     state: link
@@ -79,10 +82,15 @@
     - TV
 
 # rclone
+
 - name: Copy systemd config
   copy:
-    src: "{{playbook_dir}}/files/systemd/rclone.service"
-    dest: /etc/systemd/system/rclone.service
+    src: "{{playbook_dir}}/files/systemd/{{item}}.service"
+    dest: "/etc/systemd/system/{{item}}.service"
+  with_items:
+    - rclone
+    - rclone-gcache
+    - rclone-gdrive
 
 - name: copy rclone conf local
   copy:
@@ -101,9 +109,12 @@
 - name: reload systemd
   systemd: daemon_reload=yes
 
-- name: enable rclone
+- name: enable systemd items
   systemd:
-    name: rclone
+    name: "{{item}}.service"
     enabled: yes
     state: started
-
+  with_items:
+    - rclone
+    - rclone-gcache
+    - rclone-gdrive
