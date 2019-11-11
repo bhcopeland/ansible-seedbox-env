@@ -4,6 +4,7 @@ services:
   plex:
     hostname: seedbox.copeland.me.uk
     image: plexinc/pms-docker:latest
+    container_name: plexmediaserver
     networks:
       plex-network:
         aliases:
@@ -26,11 +27,11 @@ services:
 #      - ADVERTISE_IP=http://51.15.131.39:3001/
 #      - LB_URL=http://51.15.131.39:3001/
     volumes:
-#      - type: volume
-#        source: plex_binaries
-#        target: /usr/lib/plexmediaserver
+      - type: volume
+        source: plex_binaries
+        target: /usr/lib/plexmediaserver
       - type: bind
-        source: /var/lib/plexmediaserver
+        source: /opt/plexmediaserver
         target: /config
       - type: bind
         source: /mnt/storage

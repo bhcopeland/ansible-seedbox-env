@@ -1,0 +1,16 @@
+---
+version: "2"
+services:
+  tautulli:
+    image: linuxserver/tautulli:6e3147c5-ls31
+    container_name: plexpy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /opt/plexpy-new:/config
+#      - <path to plex logs>:/logs
+    ports:
+      - 8181:8181
+    restart: unless-stopped

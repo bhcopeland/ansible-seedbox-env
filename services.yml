@@ -21,6 +21,8 @@
     - "/mnt/storage" #rclone mount
     - "/mnt/gdrive" #rclone mount
     - "/mnt/gstorage" #rclone mount
+    - "/opt/plex" # docker config dir
+    - "/opt/plexpy" # docker config dir
     - "{{flexget_path}}"
     - "{{mnt_dir}}/torrents/completed"
     - "{{mnt_dir}}/torrents/TV"

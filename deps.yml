@@ -11,6 +11,7 @@
     - docker.io
     - docker-compose
     - mosh
+    - vnstat
 
 - name: install rclone
   apt: 
@@ -53,3 +54,9 @@
     dest: "/home/{{username}}/.zshrc"
     owner: "{{username}}"
     force: yes
+
+- name: add user to docker group
+  user:
+    name: "{{username}}"
+    group: docker
+    append: yes

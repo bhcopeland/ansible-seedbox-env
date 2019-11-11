@@ -2,4 +2,7 @@
 
 - name: Deploy docker compose
   docker_compose:
-    project_src: "{{playbook_dir}}/files/docker/docker-plex"
+    project_src: "{{playbook_dir}}/files/docker/docker-{{item}}"
+  with_items:
+    - plex
+    - plexpy
