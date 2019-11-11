@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+  plex:
+    hostname: seedbox.copeland.me.uk
+    image: plexinc/pms-docker:latest
+    networks:
+      plex-network:
+        aliases:
+          - seedbox.copeland.me.uk
+    ports:
+      - 32400:32400/tcp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    environment:
+      - PLEX_UID=1000 # Make this the uid of your user account (type "id" in terminal and look for uid=xxxx)
+      - PLEX_GID=1000 # Make this the gid of your user account (type "id" in terminal and look for gid=xxxx)
+      - TZ=Europe/London
+      - HOSTNAME=seedbox.copeland.me.uk
+#      - ADVERTISE_IP=http://51.15.131.39:3001/
+#      - LB_URL=http://51.15.131.39:3001/
+    volumes:
+#      - type: volume
+#        source: plex_binaries
+#        target: /usr/lib/plexmediaserver
+      - type: bind
+        source: /var/lib/plexmediaserver
+        target: /config
+      - type: bind
+        source: /mnt/storage
+        target: /mnt/storage
+      - type: bind # music
+        source: /mnt/gdrive
+        target: /mnt/gdrive
+    restart: unless-stopped
+
+volumes:
+  plex_binaries:
+
+networks:
+  plex-network:
