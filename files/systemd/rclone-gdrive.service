@@ -19,12 +19,8 @@ After=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/rclone mount --config /home/bhcopeland/.rclone.conf gcache: /mnt/gstorage --read-only --allow-other --allow-non-empty --dir-cache-time=160h --cache-chunk-size=10M --cache-info-age=168h --cache-workers=5 --attr-timeout=1s --write-back-cache --syslog --umask 002 --rc --cache-tmp-upload-path /mnt/data/upload --cache-tmp-wait-time 30m --cache-db-path /home/bhcopeland/.config/rclone --log-level DEBUG
-#ExecStart=/usr/bin/rclone mount --umask 0 --allow-other --max-read-ahead 200M gdrive:/ /media/Storage
-ExecStop=/bin/fusermount -uz /mnt/gstorage
-RemainAfterExit=no
-Restart=on-failure
-RestartSec=5s
+ExecStart=/usr/bin/rclone mount --config /home/bhcopeland/.rclone.conf --allow-non-empty --allow-other --max-read-ahead 20000M gdrive:/ /mnt/gdrive -vvvv
+ExecStop=/bin/fusermount -uz /mnt/gdrive
 
 [Install]
 WantedBy=default.target
