@@ -11,8 +11,13 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - /opt/sonarr:/config
-      - /mnt/storage/Plex/TV:/tv
+      - /mnt/storage/Plex/TV:/mnt/storage/Plex/TV
       - /mnt/data/torrents:/downloads
+      - /mnt/data/torrents/completed:/data/completed
     ports:
       - 8989:8989
     restart: unless-stopped
+networks:
+  default:
+    external:
+      name: dockerdeluge_default

@@ -21,7 +21,8 @@ services:
             UMASK: '000'
             VPN_ENABLED: 'yes'
             VPN_PROV: 'custom'
-            ENABLE_PRIVOXY: 'yes'
+            ENABLE_PRIVOXY: 'no'
             STRICT_PORT_FORWARDING: 'yes'
             NAME_SERVERS: '8.8.8.8,8.8.4.4,209.222.18.222'
-            LAN_NETWORK: '192.168.255.0/24'
+            LAN_NETWORK: '192.168.0.0/24'
+        restart: unless-stopped
