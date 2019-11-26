@@ -6,3 +6,7 @@
   with_items:
     - plex
     - plexpy
+    - deluge
+    - jackett
+    - radarr
+    - sonarr
