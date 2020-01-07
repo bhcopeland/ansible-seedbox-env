@@ -1,0 +1,19 @@
+version: "3"
+services:
+ get-iplayer:
+   image: binhex/arch-get-iplayer
+   container_name: get-iplayer
+   volumes:
+     - /opt/get_iplayer/downloaded:/data 
+     - /opt/get_iplayer:/config
+     - /etc/localtime:/etc/localtime:ro 
+   environment:
+     - UMASK=000 
+     - PUID=1000 
+     - PGID=1000 
+     - SHOWS="Rick Stein"
+     - SCHEDULE=1m
+networks:
+  default:
+    external:
+      name: dockerprivoxyvpn_default

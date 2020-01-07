@@ -13,6 +13,7 @@
     - mosh
     - vnstat
     - unionfs-fuse
+    - ncdu
 
 - name: install rclone
   apt: 

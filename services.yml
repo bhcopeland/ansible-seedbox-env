@@ -44,6 +44,15 @@
     - "{{data_dir}}/Movies"
     - "{{data_dir}}/completed/Movies"
 
+- name: copy apache config
+  copy:
+    src: "{{playbook_dir}}/files/apache2/sites-enabled"
+    dest: "/etc/apache2/"
+    owner: root
+    force: yes
+    directory_mode: yes
+  become: yes
+
 - name: Copy flexget config
   copy:
     src: "{{playbook_dir}}/files/flexget"

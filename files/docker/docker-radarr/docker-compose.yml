@@ -11,8 +11,15 @@ services:
       - UMASK_SET=022 #optional
     volumes:
       - /opt/radarr:/config
-      - /mnt/storage/Plex/Movies:/movies
+      - /mnt/storage/Plex/Movies:/mnt/storage/Plex/Movies
       - /mnt/data/torrents:/downloads
+      - /mnt/data/torrents/completed:/data/completed
     ports:
       - 7878:7878
     restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: dockerdeluge_default
+    
