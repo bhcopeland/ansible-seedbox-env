@@ -23,12 +23,12 @@ def run_flexget():
     return output
 
 def run_rclone():
-    r = subprocess.Popen("flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ -vvv", shell=True, stdout=subprocess.PIPE)
+    r = subprocess.Popen("/usr/bin/flock -n /tmp/.rlock_lock /usr/local/bin/rclone move /var/data/ gstorage:/Plex/ -vvv", shell=True, stdout=subprocess.PIPE)
     (output, err) = r.communicate()
     r_status = r.wait()
 
 def run_iplayer():
-    p = subprocess.Popen("get_iplayer --pvr " + show, shell=True, stdout=subprocess.PIPE)
+    p = subprocess.Popen("/usr/bin/get-iplayer --pvr " + show, shell=True, stdout=subprocess.PIPE)
     (output, err) = p.communicate()
     p_status = p.wait()
          
@@ -46,4 +46,4 @@ for show in tv_shows:
        # if files.endswith(".mp4"):
     #      print("rclone", output)
 
-
+run_rclone()
