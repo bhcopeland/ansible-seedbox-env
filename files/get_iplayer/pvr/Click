@@ -1,5 +1,0 @@
-exclude Short Edition
-fileprefix <nameshort> <firstbcastdate> <episodeshort>
-output /mnt/data/completed/TV
-tvmode best
-search0 Click
