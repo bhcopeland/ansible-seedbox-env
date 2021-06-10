@@ -27,9 +27,9 @@ services:
 #      - ADVERTISE_IP=http://51.15.131.39:3001/
 #      - LB_URL=http://51.15.131.39:3001/
     volumes:
-      - type: volume
-        source: plex_binaries
-        target: /usr/lib/plexmediaserver
+      #      - type: volume
+      #        source: plex_binaries
+      #        target: /usr/lib/plexmediaserver
       - type: bind
         source: /opt/plexmediaserver
         target: /config
