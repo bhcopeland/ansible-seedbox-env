@@ -1,4 +1,5 @@
 ---
+# unionfs-fuse -o cow,allow_other,nonempty /var/data=RW:/mnt/gstorage/Plex=RO /mnt/storage/Plex
 
 - name: ensure cron exists
   template:
@@ -101,7 +102,6 @@
     dest: "/etc/systemd/system/{{item}}.service"
   with_items:
     - rclone
-    - rclone-gcache
     - rclone-gdrive
 
 - name: copy rclone conf local
