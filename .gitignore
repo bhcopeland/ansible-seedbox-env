@@ -4,3 +4,4 @@
 *.retry
 .vault_pass
 *pvr_lock
+venv
