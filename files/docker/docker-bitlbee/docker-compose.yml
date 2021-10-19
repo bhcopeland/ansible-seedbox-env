@@ -1,0 +1,13 @@
+version: "2.0"
+
+services:
+  bitlbee:
+    image: 'ezkrg/bitlbee-libpurple'
+    restart: always
+    ports:
+      - '6667:6667'
+    volumes:
+      - bitlbee_data:/var/lib/bitlbee
+
+volumes:
+    bitlbee_data:
