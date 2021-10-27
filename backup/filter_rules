@@ -1,0 +1,9 @@
++ plexpy/backups/**
++ plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml
++ sonarr/Backups/**
++ radarr/Backups/**
++ lidarr/Backups/**
++ jacket/**
++ privoxyvpn-lon/**
+
+- *

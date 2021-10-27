@@ -9,3 +9,4 @@
 @weekly python /home/{{username}}/ansible-seedbox-env/automate/deploy.py
 @hourly get_iplayer --pvr --quiet 2>> /tmp/get_iplayer.log
 {% endif %}
+@daily /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
