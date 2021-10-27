@@ -21,8 +21,22 @@ After=network-online.target
 User=bhcopeland
 Group=bhcopeland
 Type=simple
-ExecStart=/usr/bin/rclone mount --config /etc/rclone.conf gcache: /mnt/gstorage --read-only --allow-other --allow-non-empty --dir-cache-time=160h --cache-chunk-size=10M --cache-info-age=168h --cache-workers=5 --attr-timeout=1s --write-back-cache --syslog --umask 002 --rc --cache-tmp-upload-path /mnt/data/upload --cache-tmp-wait-time 30m --cache-db-path /home/bhcopeland/.config/rclone/ --log-level NOTICE
+ExecStart=/usr/bin/rclone mount --config /home/bhcopeland/.config/rclone/rclone.conf gcache: /mnt/gstorage --read-only --allow-other --allow-non-empty --dir-cache-time 160h --cache-chunk-size 10M --cache-info-age 168h --cache-workers 5 --attr-timeout 1s --write-back-cache --syslog --umask 000 --rc --cache-tmp-upload-path /mnt/data/upload --cache-tmp-wait-time 30m --cache-db-path /home/bhcopeland/.config/rclone/ --log-level NOTICE
 #ExecStart=/usr/bin/rclone mount --umask 0 --allow-other --max-read-ahead 200M gdrive:/ /media/Storage
+
+#ExecStart=/usr/bin/rclone mount --config /home/bhcopeland/.config/rclone/rclone.conf gcache: /mnt/gstorage \
+#--allow-other \
+#--dir-cache-time 1000h \
+#--log-level INFO \
+#--log-file /tmp/rclone.log \
+#--poll-interval 15s \
+#--umask 002 \
+#--cache-dir=/home/bhcopeland/.config/rclone/ \
+#--vfs-cache-mode writes \
+#--vfs-cache-max-size 500G \
+#--vfs-cache-max-age 24h \
+#--bwlimit-file 16M
+ 
 ExecStop=/bin/fusermount -uz /mnt/gstorage
 RemainAfterExit=no
 Restart=on-failure

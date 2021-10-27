@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /opt/lidarr:/config
+      - /mnt/gdrive/Music:/music #optional
+      - /mnt/data/torrents:/downloads
+      - /mnt/data/torrents/completed:/data/completed
+    ports:
+      - 8686:8686
+    restart: unless-stopped

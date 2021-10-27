@@ -1,0 +1,47 @@
+---
+- name: Check ufw_open_ports
+  fail: msg="ssh missing from ufw_open_ports"
+  when: 4747 not in ufw_open_ports
+
+- name: Install server deps
+  apt: name={{packages}} state=present
+  vars:
+    packages:
+    - ufw
+
+- name: Reset ufw to defaults
+  ufw: state=reset
+  when: firewall_reset is defined
+
+- name: Open firewall ports
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "{{item}}"
+  with_items:
+    - "{{ufw_open_ports}}"
+      #  notify:
+      #    - restart-ufw
+
+- name: Open firewall ports
+  ufw:
+    rule: allow
+    proto: udp
+    port: "{{item}}"
+  with_items:
+    - "{{ufw_udp_open_ports}}"
+ 
+- name: Enable Firewall
+  ufw:
+    direction: "{{item.direction}}"
+    policy: "{{item.policy}}"
+    logging: off
+    state: enabled
+  with_items:
+    - { direction: 'incoming', policy: 'deny' }
+    - { direction: 'outgoing', policy: 'allow' }
+      #  notify:
+      #    - restart-ufw
+
+- name: restart-ufw
+  service: name=ufw state=restarted enabled=yes

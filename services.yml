@@ -128,5 +128,4 @@
     state: started
   with_items:
     - rclone
-    - rclone-gcache
     - rclone-gdrive
