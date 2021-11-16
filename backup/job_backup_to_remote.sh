@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-export rclone_jobber="rclone_jobber"
+export rclone_jobber="/home/bhcopeland/ansible-seedbox-env/backup/rclone_jobber"
 
 rclone_jobber=$rclone_jobber
 
