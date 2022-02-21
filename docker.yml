@@ -6,7 +6,7 @@
   with_items:
     - plex
     - plexpy
-    - privoxyvpn
+    - deluge
     - jackett
     - radarr
     - sonarr
