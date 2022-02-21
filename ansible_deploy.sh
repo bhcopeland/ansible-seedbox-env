@@ -11,10 +11,6 @@
 #       prompt: "setup get_iplayer?"
 
    tasks:
-#     - name: install iplayer
-#       include: get_iplayer.yml
-#       when: configure_iplayer.0 is defined
-
      - name: install deps
        include: deps.yml
        tags: deps
