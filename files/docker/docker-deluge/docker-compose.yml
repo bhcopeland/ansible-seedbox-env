@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+    delugevpn:
+        image: binhex/arch-delugevpn
+        container_name: delugevpn
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - 8112:8112
+            - 8118:8118
+            - 58846:58846
+            - 58946:58946
+        volumes:
+            - /opt/delugevpn/docker/deluge/config:/config
+            - /mnt/data/torrents:/data
+            - /etc/localtime:/etc/localtime:ro
+        environment:
+            PUID: 1000
+            PGID: 1000
+            UMASK: '000'
+            VPN_ENABLED: 'yes'
+            VPN_PROV: 'custom'
+            ENABLE_PRIVOXY: 'no'
+            STRICT_PORT_FORWARDING: 'yes'
+            NAME_SERVERS: '8.8.8.8,8.8.4.4,209.222.18.222'
+            LAN_NETWORK: '192.168.0.0/24'
+        restart: unless-stopped
