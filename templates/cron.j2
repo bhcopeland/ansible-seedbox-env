@@ -5,8 +5,7 @@
 * */3 * * * flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude *partial~ --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m > /dev/null 2>&1
 #@monthly sudo openssl pkcs12 -password pass:123 -export -out /var/lib/plexmediaserver/certificate.pfx -inkey /etc/apache2/ssl/certs/seedbox.copeland.me.uk-ssl.key -in /etc/apache2/ssl/certs/seedbox.copeland.me.uk-ssl.pem -certfile /root/.acme.sh/seedbox.copeland.me.uk/fullchain.cer && sudo chown plex:plex /var/lib/plexmediaserver/certificate.pfx
 #@daily sudo systemctl restart sonarr@{{username}}.service && sudo systemctl restart radarr.service
-{% if configure_iplayer.0 is defined %}
-@weekly python /home/{{username}}/ansible-seedbox-env/automate/deploy.py
-@hourly get_iplayer --pvr --quiet 2>> /tmp/get_iplayer.log
-{% endif %}
 @daily /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
+@daily /home/{{username}}/ansible-seedbox-env/iplayer.sh
+@daily cd /home/{{username}}/ansible-seedbox-env/backup/ && bash /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
+@weekly find /mnt/data/torrents -mtime +30

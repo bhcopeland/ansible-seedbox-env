@@ -51,20 +51,20 @@
     directory_mode: yes
   become: yes
 
-- name: Copy flexget config
-  copy:
-    src: "{{playbook_dir}}/files/flexget"
-    dest: "/opt"
-    owner: "{{username}}"
-    force: yes
-    directory_mode: yes
+    #- name: Copy flexget config
+    #  copy:
+    #    src: "{{playbook_dir}}/files/flexget"
+    #    dest: "/opt"
+    #    owner: "{{username}}"
+    #    force: yes
+    #    directory_mode: yes
 
-- name: Install flexget
-  pip:
-    name: flexget
-    virtualenv: "{{flexget_path}}/venv"
+    #- name: Install flexget
+    #  pip:
+    #    name: flexget
+    #    virtualenv: "{{flexget_path}}/venv"
     #    virtualenv_python: python3.5
-  become_user: "{{username}}"
+    #  become_user: "{{username}}"
 
 - name: Ensure default folders exist
   file:
