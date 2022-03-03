@@ -1,0 +1,10 @@
+---
+# docker run --name openspeedtest -p 3000:3000 -p 3001:3001 openspeedtest/latest -d
+version: "2.1"
+services:
+  speedtest:
+    image: openspeedtest/latest
+    container_name: openspeedtest
+    ports:
+      - 3000:3000
+    restart: unless-stopped
