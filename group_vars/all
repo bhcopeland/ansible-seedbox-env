@@ -6,7 +6,7 @@ flexget_path: /opt/flexget
 data_dir: /var/data
 mnt_dir: /mnt/data
 
-rclone_version: 1.56.2
+rclone_version: 1.58.1
 
 ufw_open_ports:
   - 4747

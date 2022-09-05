@@ -8,13 +8,13 @@
     - software-properties-common
     - fuse
     - zsh
-    - docker.io
-    - docker-compose
+      #    - docker.io
+      #    - docker-compose
     - mosh
     - vnstat
     - unionfs-fuse
     - ncdu
-
+  
 - name: install rclone
   apt: 
     deb: https://downloads.rclone.org/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb
@@ -27,12 +27,17 @@
     - 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367 #ansible
     - 11E9DE8848F2B65222AA75B8D1820DB22A11534E #weechat
 
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+
 - name: add ppas
   apt_repository:
     repo: "{{item}}"
   with_items:
     - "deb https://weechat.org/ubuntu bionic main"
     - ppa:ansible/ansible
+    - "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 
 - name: install ppa pkgs
   apt: pkg={{item}} update_cache=yes
@@ -69,3 +74,16 @@
     dest: /etc/fuse.conf
     regexp: '^#?user_allow_other'
     line: user_allow_other
+
+- name: Install Docker CE
+  apt:
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+    update_cache: yes
+
+- name: Install prerequisites for docker-compose
+  apt:
+    name: ['python3-pip', 'python3-setuptools', 'virtualenv']
+
+- name: Install docker-compose
+  pip:
+    name: docker-compose

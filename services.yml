@@ -25,6 +25,7 @@
     - "/opt/plex" # docker config dir
     - "/opt/plexpy" # docker config dir
     - "/opt/sonarr" # docker config dir
+    - "/opt/zoneminder" # docker config dir
     - "{{flexget_path}}"
     - "{{mnt_dir}}/torrents/completed"
     - "{{mnt_dir}}/torrents/TV"
