@@ -18,6 +18,7 @@ services:
 
   zoneminder:
     image: ghcr.io/zoneminder-containers/zoneminder-base:latest
+    container_name: zoneminder
     restart: always
     stop_grace_period: 45s
     depends_on:
@@ -27,6 +28,7 @@ services:
     networks:
       - zoneminder
     volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
       - /opt/zoneminder/data:/data
       - /opt/zoneminder/config:/config
       - /opt/zoneminder/log:/log
