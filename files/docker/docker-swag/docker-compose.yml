@@ -1,0 +1,40 @@
+---
+version: "2.1"
+services:
+  swag:
+    image: lscr.io/linuxserver/swag:latest
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=seedbox.copeland.me.uk
+      - VALIDATION=http
+        #      - SUBDOMAINS=www, #optional
+      - CERTPROVIDER= #optional
+        #     - DNSPLUGIN=cloudflare #optional
+      - PROPAGATION= #optional
+        #     - DUCKDNSTOKEN= #optional
+        #      - EMAIL= #optional
+      - ONLY_SUBDOMAINS=false #optional
+      - EXTRA_DOMAINS= #optional
+      - STAGING=false #optional
+    volumes:
+      - /opt/swag/config:/config
+    ports:
+      - 443:443
+      - 80:80 #optional
+    restart: unless-stopped
+    #
+    #networks:
+        #    dockerdeluge_default:
+        #  dockerplex_plex-network:
+        #    external: true
+      #    external:
+      #      name: dockerplex_plex-network
+      #    external:
+      #      name: dockerjackett_default
+      #    external:
+      #      name: docker-zoneminder_zoneminder

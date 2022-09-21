@@ -3,8 +3,10 @@
 + sonarr/Backups/**
 + radarr/Backups/**
 + lidarr/Backups/**
++ prowlarr/Backups/**
 + jacket/**
 + privoxyvpn-lon/**
 + weechat/**
++ swag/**
 
 - *
