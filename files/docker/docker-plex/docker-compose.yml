@@ -41,6 +41,9 @@ services:
       - type: bind # music
         source: /mnt/gdrive
         target: /mnt/gdrive
+      - type: bind
+        source: /dev/shm
+        target: /transcode
     restart: unless-stopped
 
 volumes:

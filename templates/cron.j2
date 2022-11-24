@@ -1,10 +1,6 @@
-#@hourly {{flexget_path}}/venv/bin/flexget --cron -c /opt/flexget/config_tv.yml execute >/dev/null 2>&1
-#@hourly {{flexget_path}}/venv/bin/flexget --cron -c /opt/flexget/config_sorter.yml execute >/dev/null 2>&1
 #SHELL=/bin/bash
-#@weekly source /opt/flexget/bin/activate && sudo -H /opt/flexget/bin/pipdate >/dev/null 2>&1
-* */3 * * * flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude *partial~ --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m > /dev/null 2>&1
-#@monthly sudo openssl pkcs12 -password pass:123 -export -out /var/lib/plexmediaserver/certificate.pfx -inkey /etc/apache2/ssl/certs/seedbox.copeland.me.uk-ssl.key -in /etc/apache2/ssl/certs/seedbox.copeland.me.uk-ssl.pem -certfile /root/.acme.sh/seedbox.copeland.me.uk/fullchain.cer && sudo chown plex:plex /var/lib/plexmediaserver/certificate.pfx
-#@daily sudo systemctl restart sonarr@{{username}}.service && sudo systemctl restart radarr.service
+#* */3 * * * flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude *partial~ --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m > /dev/null 2>&1
+@daily flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude="*partial~" --exclude ".**" --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m
 @daily /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
 @daily /home/{{username}}/ansible-seedbox-env/iplayer.sh
 @daily cd /home/{{username}}/ansible-seedbox-env/backup/ && bash /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
