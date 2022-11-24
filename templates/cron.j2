@@ -1,6 +1,6 @@
 #SHELL=/bin/bash
 #* */3 * * * flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude *partial~ --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m > /dev/null 2>&1
-@daily flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude="*partial~" --exclude ".**" --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m
+@daily flock -n /tmp/.rlock_lock rclone move /var/data/ gstorage:/Plex/ --exclude="*partial~" --exclude ".**" --no-traverse --transfers=3 --checkers=3 --delete-after --min-age 1m --bwlimit 10M > /dev/null 2>&1
 @daily /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
 @daily /home/{{username}}/ansible-seedbox-env/iplayer.sh
 @daily cd /home/{{username}}/ansible-seedbox-env/backup/ && bash /home/{{username}}/ansible-seedbox-env/backup/job_backup_to_remote.sh
