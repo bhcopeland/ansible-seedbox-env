@@ -7,6 +7,11 @@
     dest: "/var/spool/cron/crontabs/{{username}}"  
     owner: "{{username}}"
 
+- name: ensure cron exists ROOT
+  template:
+    src: cron.j2
+    dest: "/var/spool/cron/crontabs/root"  
+
 - name: update default shell
   user: 
     name: "{{username}}"
@@ -52,20 +57,6 @@
     directory_mode: yes
   become: yes
 
-    #- name: Copy flexget config
-    #  copy:
-    #    src: "{{playbook_dir}}/files/flexget"
-    #    dest: "/opt"
-    #    owner: "{{username}}"
-    #    force: yes
-    #    directory_mode: yes
-
-    #- name: Install flexget
-    #  pip:
-    #    name: flexget
-    #    virtualenv: "{{flexget_path}}/venv"
-    #    virtualenv_python: python3.5
-    #  become_user: "{{username}}"
 
 - name: Ensure default folders exist
   file:

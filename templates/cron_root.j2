@@ -1,0 +1,3 @@
+#SHELL=/bin/bash
+@weekly find /mnt/data/torrents -mtime +30 -type f -exec rm {} \;
+0 0 */3 * * find /opt/zoneminder/data -mtime +5 -type f -exec rm {} \;
