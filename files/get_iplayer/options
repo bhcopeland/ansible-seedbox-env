@@ -1,1 +1,4 @@
+tvmode fhd,hd,sd,web,mobile
 nopurge 1
+ffmpeg /usr/bin/ffmpeg
+output /data/output

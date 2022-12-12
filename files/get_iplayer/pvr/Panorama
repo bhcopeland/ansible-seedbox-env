@@ -1,4 +1,0 @@
-fileprefix <nameshort>_<firstbcastdate>
-output /mnt/data/completed/TV
-tvmode best
-search0 Panorama

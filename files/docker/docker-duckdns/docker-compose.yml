@@ -1,0 +1,15 @@
+---
+version: "2.1"
+services:
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    environment:
+      - PUID=1000 #optional
+      - PGID=1000 #optional
+      - TZ=Europe/London
+      - SUBDOMAINS=bhcopeland
+      - LOG_FILE=false #optional
+    restart: unless-stopped
+    env_file:
+      - .env_token
