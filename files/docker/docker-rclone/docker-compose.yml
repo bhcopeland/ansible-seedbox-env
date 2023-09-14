@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  rclone:
+    container_name: rclone
+    image: wiserain/rclone                      # or ghcr.io/wiserain/rclone
+    restart: always
+    network_mode: "bridge"
+    volumes:
+      - type: bind
+        source: /home/ben/.config/rclone
+        target: /config
+          #      - ${DOCKER_ROOT}/rclone/config:/config
+          #      - ${DOCKER_ROOT}/rclone/log:/log
+          #      - ${DOCKER_ROOT}/rclone/cache:/cache
+      - /tmp/foo:/data:shared
+#      - /local/dir/to/be/merged/with:/local     # Optional: if you have a folder to be mergerfs/unionfs with
+    devices:
+      - /dev/fuse
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Asia/Seoul
+      - RCLONE_REMOTE_PATH=gstorage:/
+      - RCLONE_MOUNT_USER_OPTS=--allow-non-empty
